@@ -20,14 +20,13 @@ public class RedesController {
 		return os + " - v. " + version + " - arch. " + arch;
 	}
 	
-	public String callOS()
+	public void callOS()
 	{
-		return OS();
+		System.out.println(OS());
 	}
 	
 	public void IP()
 	{
-//		String os = OS();
 		String process = null;
 		if(OS().contains("Windows"))
 		{

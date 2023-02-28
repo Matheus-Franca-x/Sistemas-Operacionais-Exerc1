@@ -83,14 +83,13 @@ public class RedesController {
 			String linha = buffer.readLine();
 			while (linha != null)
 			{
-				if (OS().contains("Windows"))
+				
+				if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
 				{
-					if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
-					{
-						System.out.println(linha);
-					}
-					linha = buffer.readLine();
+					System.out.println(linha);
 				}
+				linha = buffer.readLine();
+				
 			}
 			buffer.close();
 			leitor.close();

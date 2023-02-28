@@ -44,6 +44,17 @@ public class RedesController {
 	
 	public void ping()
 	{
+		String process = null;
+		if(OS().contains("Windows"))
+		{
+			process = "ping -4 -n 10 www.google.com.br";
+		}
+		else if(OS().contains("Linux"))
+		{			
+			process = "ping -4 -c 10 www.google.com.br";
+		}
+		
+		readProcess(process);
 		
 	}
 	
@@ -83,13 +94,19 @@ public class RedesController {
 			String linha = buffer.readLine();
 			while (linha != null)
 			{
-				
-				if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
+				if(process == "ipconfig" || process == "ifconfig")
+				{
+					if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet adapter") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
+					{
+						System.out.println(linha);
+					}
+					linha = buffer.readLine();
+				}
+				else
 				{
 					System.out.println(linha);
+					linha = buffer.readLine();
 				}
-				linha = buffer.readLine();
-				
 			}
 			buffer.close();
 			leitor.close();

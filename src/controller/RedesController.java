@@ -102,6 +102,14 @@ public class RedesController {
 					}
 					linha = buffer.readLine();
 				}
+				else if(process.contains("ping"))
+				{
+					if(linha.contains("ms"))
+					{
+						System.out.println(linha);
+					}
+					linha = buffer.readLine();
+				}
 				else
 				{
 					System.out.println(linha);

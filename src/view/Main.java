@@ -13,8 +13,7 @@ public class Main
 		
 		redeControll.IP();
 		
-		String process = "ping google.com.br";
-		redeControll.readProcess(process);
+		redeControll.ping();
 	}
 	
 }

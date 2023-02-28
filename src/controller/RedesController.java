@@ -27,6 +27,18 @@ public class RedesController {
 	
 	public void IP()
 	{
+		String os = OS();
+		String process = null;
+		if(os.contains("Windows"))
+		{
+			process = "ipconfig";
+		}
+		else if(os.contains("Linux"))
+		{
+			process = "ifconfig";
+		}
+		
+		readProcess(process);
 		
 	}
 	

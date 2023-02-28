@@ -1,8 +1,15 @@
 package view;
 
-public class Main {
+import controller.RedesController;
+
+public class Main 
+{
 	public static void main(String[] args)
 	{
-		System.out.println("Olá");
+		RedesController redeControll = new RedesController();
+		String os = redeControll.callSO();
+		
+		System.out.println(os);
+		
 	}
 }

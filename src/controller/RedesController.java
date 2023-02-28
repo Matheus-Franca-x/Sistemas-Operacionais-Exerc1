@@ -27,13 +27,13 @@ public class RedesController {
 	
 	public void IP()
 	{
-		String os = OS();
+//		String os = OS();
 		String process = null;
-		if(os.contains("Windows"))
+		if(OS().contains("Windows"))
 		{
 			process = "ipconfig";
 		}
-		else if(os.contains("Linux"))
+		else if(OS().contains("Linux"))
 		{
 			process = "ifconfig";
 		}
@@ -83,8 +83,14 @@ public class RedesController {
 			String linha = buffer.readLine();
 			while (linha != null)
 			{
-				System.out.println(linha);
-				linha = buffer.readLine();
+				if (OS().contains("Windows"))
+				{
+					if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
+					{
+						System.out.println(linha);
+					}
+					linha = buffer.readLine();
+				}
 			}
 			buffer.close();
 			leitor.close();

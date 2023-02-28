@@ -13,7 +13,7 @@ public class Main
 		
 		redeControll.IP();
 		
-//		String process = "ipconfig";
+//		String process =;
 //		redeControll.readProcess(process);
 	}
 }

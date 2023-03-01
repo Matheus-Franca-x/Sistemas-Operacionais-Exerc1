@@ -57,67 +57,42 @@ public class RedesController {
 		
 	}
 	
-	public void callProcess(String process) 
-	{
-		try
-		{
-			Runtime.getRuntime().exec(process);
-		} catch(Exception e) {
-			String msgErro = e.getMessage();
-			if(msgErro.contains("740"))
-			{
-				StringBuffer buffer = new StringBuffer();
-				buffer.append("cmd /c");
-				buffer.append(" ");
-				buffer.append(process);
-				try {
-					Runtime.getRuntime().exec(buffer.toString());
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-			else 
-			{
-				System.err.println(msgErro);
-			}
-		}
-	}
 	
 	public void readProcess(String process)
 	{
 		try {
-			Process p = Runtime.getRuntime().exec(process);
-			InputStream fluxo = p.getInputStream();
-			InputStreamReader leitor = new InputStreamReader(fluxo);
-			BufferedReader buffer = new BufferedReader(leitor);
-			String linha = buffer.readLine();
-			while (linha != null)
-			{
-				if(process == "ipconfig" || process == "ifconfig")
+				Process p = Runtime.getRuntime().exec(process);
+				InputStream fluxo = p.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while (linha != null)
 				{
-					if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet adapter") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
+					if(process == "ipconfig" || process == "ifconfig")
+					{
+						if (linha.contains("Adaptador") || linha.contains("IPv4") || linha.contains("Ethernet adapter") || linha.contains("IPv4") || linha.contains("mtu") || linha.contains("inet "))
+						{
+							System.out.println(linha);
+						}
+						linha = buffer.readLine();
+					}
+					else if(process.contains("ping"))
+					{
+						if(linha.contains("ms"))
+						{
+							System.out.println(linha);
+						}
+						linha = buffer.readLine();
+					}
+					else
 					{
 						System.out.println(linha);
+						linha = buffer.readLine();
 					}
-					linha = buffer.readLine();
 				}
-				else if(process.contains("ping"))
-				{
-					if(linha.contains("ms"))
-					{
-						System.out.println(linha);
-					}
-					linha = buffer.readLine();
-				}
-				else
-				{
-					System.out.println(linha);
-					linha = buffer.readLine();
-				}
-			}
-			buffer.close();
-			leitor.close();
-			fluxo.close();
+				buffer.close();
+				leitor.close();
+				fluxo.close();
 			
 			} catch (Exception e) {
 			String msgErro = e.getMessage();
